@@ -19,16 +19,8 @@ def main():
             print(f"Bot starts in: {i} seconds")
             time.sleep(1)
 
-    # def on_press(key):
-    #     try:
-    #         print("alphanumeric key {0} pressed".format(key.char))
-    #     except AttributeError:
-    #         print("special key {0} pressed".format(key))
-
     def on_release(key):
         global running
-        # print("{0} released".format(key))
-        # Stop bot
         if key == kb.Key.esc:
             running = False
             return False
