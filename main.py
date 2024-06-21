@@ -38,21 +38,31 @@ def main():
 
     def player_move(counter):
         if 0 <= counter <= 5:
-            pg.press("a", interval=0.3)
-            pg.sleep(1)
+            pg.keyDown(key="1")
+            pg.keyDown(key="1")
+            pg.keyup(key="1")
+            pg.keyup(key="1")
+            pg.sleep(0.2)
         elif 5 <= counter <= 10:
-            pg.press("d", interval=0.3)
-            pg.sleep(1)
+            pg.keyDown(key="2")
+            pg.keyDown(key="2")
+            pg.keyup(key="2")
+            pg.keyup(key="2")
+            pg.sleep(0.2)
 
     def player_grenade(counter):
         if 10 <= counter <= 15:
-            pg.press("g", interval=0.3)
+            pg.press("g")
+            pg.keyDown(key="f5")
+            pg.keyUp(key="f5")
+            pg.keyUp(key="q")
 
     def start():
         counter: int = 0
         while running:
             counter += 1
             print(counter)
+            time.sleep(0.3)
             player_move(counter=counter)
             player_grenade(counter=counter)
             if counter == 15:
@@ -60,8 +70,6 @@ def main():
 
     count_down()
     start()
-    # thread = threading.Thread(target=start)
-    # thread.start()
     listener.join()
 
 
