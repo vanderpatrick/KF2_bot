@@ -36,24 +36,32 @@ def main():
     listener = kb.Listener(on_release=on_release)
     listener.start()
 
-    def player_move():
-        for _ in range(0, 5):
-            pg.press("a")
+    def player_move(counter):
+        if 0 <= counter <= 5:
+            pg.press("a", interval=0.3)
+            pg.sleep(1)
+        elif 5 <= counter <= 10:
+            pg.press("d", interval=0.3)
+            pg.sleep(1)
 
-        for _ in range(0, 5):
-            pg.press("d")
+    def player_grenade(counter):
+        if 10 <= counter <= 15:
+            pg.press("g", interval=0.3)
 
-    def spam_nades():
+    def start():
+        counter: int = 0
         while running:
-            for index in range(0, 5):
-                pg.press("g", interval=0.1)
-                if index == 4:
-                    print("Starting movement")
-                    player_move()
+            counter += 1
+            print(counter)
+            player_move(counter=counter)
+            player_grenade(counter=counter)
+            if counter == 15:
+                counter = 0
 
     count_down()
-    thread = threading.Thread(target=spam_nades)
-    thread.start()
+    start()
+    # thread = threading.Thread(target=start)
+    # thread.start()
     listener.join()
 
 
